@@ -1,6 +1,7 @@
 const express = require("express");
 const hbs = require("hbs");
 const mongoose = require("mongoose");
+const bodyparser = require("body-parser");
 
 const users = require("./routes/api/userAuth");
 const profile = require("./routes/api/profile");
@@ -8,6 +9,10 @@ const posts = require("./routes/api/posts");
 
 var app = express();
 var port = process.env.PORT || 8078;
+
+//Body-parser middleware
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 
 //DB config
 const db = require("./config/keys");
