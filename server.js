@@ -2,6 +2,7 @@ const express = require("express");
 const hbs = require("hbs");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
+const passport = require('passport');
 
 const users = require("./routes/api/userAuth");
 const profile = require("./routes/api/profile");
@@ -23,16 +24,11 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
-//set view engine to handlebars. looks in views folder for html template to render
-app.set("view engine", "hbs");
+//passport middleware
+app.use(passport.initialize());
 
-//get URL string and send a response everytime that string appears.
-app.get("/", (req, res) => {
-  //res.send("");
-  res.render("page.hbs", {
-    pageTitle: "Wedding Page"
-  });
-});
+//passport config
+require('./config/passport')(passport);
 
 //use routes
 app.use("/api/users", users);
