@@ -13,7 +13,7 @@ class Register extends Component {
       name: '',
       email: '',
       password: '',
-      passowrd2: '',
+      password2: '',
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
